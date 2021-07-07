@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class TweetRepository {
 
+	/**
+	 * Tweetのデータは「2.5次元の誘惑」第45話に出てくるSNSの話題から拝借しました。
+	 */
 	private final List<Timeline> timelines = List.of(new Timeline(
 			"739d27f4-a946-4117-8efb-1156fdfcb994",
 			List.of(
