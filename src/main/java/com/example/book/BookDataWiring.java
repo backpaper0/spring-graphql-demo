@@ -1,4 +1,4 @@
-package com.example;
+package com.example.book;
 
 import org.springframework.graphql.boot.RuntimeWiringBuilderCustomizer;
 import org.springframework.stereotype.Component;

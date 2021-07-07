@@ -1,5 +1,5 @@
 
-package com.example;
+package com.example.helloworld;
 
 import org.springframework.graphql.boot.RuntimeWiringBuilderCustomizer;
 import org.springframework.stereotype.Component;

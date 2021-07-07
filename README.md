@@ -28,7 +28,7 @@ $ curl -s localhost:8080/graphql -XPOST -H "Content-Type: application/json" -d '
 ## コードに関するメモ
 
 スキーマ定義ファイルは`src/main/resources/graphql/schema.graphqls`。
-data fetchingの定義は`src/main/java/com/example/HelloWorldDataWiring.java`で行っている。
+data fetchingの定義は`com.example.helloworld.HelloWorldDataWiring`で行っている。
 
 Web MVCで使う場合は`org.springframework.graphql.boot.GraphQlWebMvcAutoConfiguration`で自動設定されるみたい。
 
