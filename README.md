@@ -34,6 +34,12 @@ Web MVCで使う場合は`org.springframework.graphql.boot.GraphQlWebMvcAutoConf
 
 プロパティは`org.springframework.graphql.boot.GraphQlProperties`を見れば把握できそう。
 
+### graphql.schema.DataFetcher
+
+`graphql.schema.DataFetcher`は`java.util.Optional`を返しても良いっぽい(`BookDataWiring`と`BookRepository`あたりを参照)。
+
+`graphql.schema.DataFetchingEnvironment`から`getSource`で現在処理している`type`を取得したり`getArgument`でクエリーパラメーターを取得して子`type`を取得することができる。
+
 ## 参考リソース
 
 - https://github.com/spring-projects/spring-graphql

@@ -1,4 +1,15 @@
 type Query {
     hello: String
+    book(isbn: ID!): Book
 }
 
+
+type Author {
+	name: String!
+}
+
+type Book {
+	isbn: ID!
+	title: String!
+	author: Author!
+}
