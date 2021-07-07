@@ -5,7 +5,7 @@
 まずは起動する。
 
 ```
-mvn spring-boot:run
+./mvnw spring-boot:run
 ```
 
 `curl`(と`jq`)で動作確認してみる。
