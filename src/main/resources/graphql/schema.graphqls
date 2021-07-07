@@ -1,6 +1,7 @@
 type Query {
     hello: String
     book(isbn: ID!): Book
+    timeline(id: ID!): Timeline
 }
 
 
@@ -12,4 +13,19 @@ type Book {
 	isbn: ID!
 	title: String!
 	author: Author!
+}
+
+
+type Timeline {
+	id: ID!
+	tweets: [Tweet]
+}
+
+type Tweet {
+	text: String!
+	user: User!
+}
+
+type User {
+	name: String!
 }
