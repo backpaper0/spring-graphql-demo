@@ -60,6 +60,15 @@ Web MVCで使う場合は`org.springframework.graphql.boot.GraphQlWebMvcAutoConf
 ちなみに`load`メソッドの戻り値は`java.util.concurrent.CompletableFuture`となっている。
 つまり`graphql.schema.DataFetcher`はシンプルな値の他に`java.util.Optional`や`java.util.concurrent.CompletableFuture`が返せるということになる。
 
+### ページネーション
+
+GraphQLの公式ページでページネーションの方式について触れつつ、オススメの方式としてRelayのCursor Connectionsの仕様を紹介している。
+
+- https://graphql.org/learn/pagination/
+- https://relay.dev/graphql/connections.htm
+
+RelayというのはFacebookが提供しているGraphQLクライアントライブラリ。
+
 ## 参考リソース
 
 - https://github.com/spring-projects/spring-graphql

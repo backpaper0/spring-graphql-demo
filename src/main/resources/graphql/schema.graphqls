@@ -2,6 +2,12 @@ type Query {
     hello: String
     book(isbn: ID!): Book
     timeline(id: ID!): Timeline
+    tasks(first: Int, after: String): TaskConnection!
+}
+
+
+type Mutation {
+	newTask(text: String!): Task!
 }
 
 
@@ -18,7 +24,7 @@ type Book {
 
 type Timeline {
 	id: ID!
-	tweets: [Tweet]
+	tweets: [Tweet!]!
 }
 
 type Tweet {
@@ -28,4 +34,28 @@ type Tweet {
 
 type User {
 	name: String!
+}
+
+
+type Task {
+	id: ID!
+	text: String!
+	done: Boolean!
+}
+
+type TaskEdge {
+	node: Task!
+	cursor: String!
+}
+
+type PageInfo {
+	hasPreviousPage: Boolean!
+	hasNextPage: Boolean!
+	startCursor: String
+	endCursor: String
+}
+
+type TaskConnection {
+	edges: [TaskEdge!]!
+	pageInfo: PageInfo!
 }
