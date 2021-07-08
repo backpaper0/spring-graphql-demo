@@ -42,9 +42,5 @@ public class TaskRepository {
 		newTask("baz");
 		newTask("qux");
 		newTask("quux");
-		newTask("corge");
-		newTask("grault");
-		newTask("garply");
-		newTask("waldo");
 	}
 }
