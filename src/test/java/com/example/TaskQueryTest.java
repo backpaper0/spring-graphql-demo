@@ -19,8 +19,8 @@ public class TaskQueryTest {
 
 	@Test
 	void task() {
-		String query = "{" +
-				"  tasks(first: 3) {" +
+		String query = "query tasks($first: Int, $after: String) {" +
+				"  tasks(first: $first, after: $after) {" +
 				"    edges {" +
 				"      node {" +
 				"        text" +
@@ -34,6 +34,7 @@ public class TaskQueryTest {
 				"}";
 
 		String after = graphQlTester.query(query)
+				.variable("first", 3)
 				.execute()
 
 				.path("tasks.edges[*].node.text")
@@ -49,21 +50,9 @@ public class TaskQueryTest {
 				.entity(String.class)
 				.get();
 
-		String query2 = "{" +
-				"  tasks(first: 3, after: \"" + after + "\") {" +
-				"    edges {" +
-				"      node {" +
-				"        text" +
-				"      }" +
-				"    }" +
-				"    pageInfo {" +
-				"      hasNextPage" +
-				"      endCursor" +
-				"    }" +
-				"  }" +
-				"}";
-
-		graphQlTester.query(query2)
+		graphQlTester.query(query)
+				.variable("first", 3)
+				.variable("after", after)
 				.execute()
 
 				.path("tasks.edges[*].node.text")
