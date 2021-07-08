@@ -69,6 +69,8 @@ GraphQLの公式ページでページネーションの方式について触れ�
 
 RelayというのはFacebookが提供しているGraphQLクライアントライブラリ。
 
+実装例は`com.example.todo.TaskDataWiring`を参考にすること。
+
 ## 参考リソース
 
 - https://github.com/spring-projects/spring-graphql
