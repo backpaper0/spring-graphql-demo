@@ -3,6 +3,7 @@ package com.example.todo;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -29,9 +30,15 @@ public class TaskRepository {
 		Task task = new Task();
 		task.setId(UUID.randomUUID().toString());
 		task.setText(text);
-		task.setDone(false);
+		task.setStatus(TaskStatus.TODO);
 		values.add(task);
 		return task;
+	}
+
+	public Optional<Task> updateTaskStatus(String id, TaskStatus status) {
+		Optional<Task> opt = values.stream().filter(a -> a.getId().equals(id)).findAny();
+		opt.ifPresent(task -> task.setStatus(status));
+		return opt;
 	}
 
 	private Task newTaskInternal(String text) {

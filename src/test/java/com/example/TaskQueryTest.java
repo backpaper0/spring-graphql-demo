@@ -9,6 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.graphql.boot.test.tester.AutoConfigureGraphQlTester;
 import org.springframework.graphql.test.tester.GraphQlTester;
 
+import com.example.todo.TaskStatus;
+
 @SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureGraphQlTester
@@ -65,5 +67,66 @@ public class TaskQueryTest {
 
 				.path("tasks.pageInfo.endCursor")
 				.valueIsEmpty();
+	}
+
+	@Test
+	void updateTaskStatus() {
+		String query = "query HeadTask {" +
+				"  tasks(first: 1) {" +
+				"    edges {" +
+				"      node {" +
+				"        id" +
+				"        text" +
+				"        status" +
+				"      }" +
+				"    }" +
+				"  }" +
+				"}";
+
+		String mutation = "mutation UpdateTaskStatus($id: ID!, $status: TaskStatus!) {" +
+				"  updateTaskStatus(id: $id, status: $status) {" +
+				"    text" +
+				"    status" +
+				"  }" +
+				"}";
+
+		String id = graphQlTester.query(query)
+				.execute()
+
+				.path("tasks.edges[*].node.text")
+				.entityList(String.class)
+				.isEqualTo(List.of("foo"))
+
+				.path("tasks.edges[*].node.status")
+				.entityList(TaskStatus.class)
+				.isEqualTo(List.of(TaskStatus.TODO))
+
+				.path("tasks.edges[*].node.id")
+				.entityList(String.class)
+				.get().get(0);
+
+		graphQlTester.query(mutation)
+				.variable("id", id)
+				.variable("status", TaskStatus.DOING)
+				.execute()
+
+				.path("updateTaskStatus.text")
+				.entity(String.class)
+				.isEqualTo("foo")
+
+				.path("updateTaskStatus.status")
+				.entity(TaskStatus.class)
+				.isEqualTo(TaskStatus.DOING);
+
+		graphQlTester.query(query)
+				.execute()
+
+				.path("tasks.edges[*].node.text")
+				.entityList(String.class)
+				.isEqualTo(List.of("foo"))
+
+				.path("tasks.edges[*].node.status")
+				.entityList(TaskStatus.class)
+				.isEqualTo(List.of(TaskStatus.DOING));
 	}
 }

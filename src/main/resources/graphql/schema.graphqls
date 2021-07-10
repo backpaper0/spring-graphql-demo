@@ -8,6 +8,7 @@ type Query {
 
 type Mutation {
 	newTask(text: TaskText!): Task!
+	updateTaskStatus(id: ID!, status: TaskStatus!): Task
 }
 
 
@@ -40,7 +41,7 @@ type User {
 type Task {
 	id: ID!
 	text: TaskText!
-	done: Boolean!
+	status: TaskStatus!
 }
 
 type TaskEdge {
@@ -61,3 +62,9 @@ type TaskConnection {
 }
 
 scalar TaskText
+
+enum TaskStatus {
+	TODO
+	DOING
+	DONE
+}

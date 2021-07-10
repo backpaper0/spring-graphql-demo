@@ -6,7 +6,7 @@ public class Task {
 
 	private String id;
 	private TaskText text;
-	private boolean done;
+	private TaskStatus status;
 
 	public String getId() {
 		return id;
@@ -24,17 +24,17 @@ public class Task {
 		this.text = text;
 	}
 
-	public boolean isDone() {
-		return done;
+	public TaskStatus getStatus() {
+		return status;
 	}
 
-	public void setDone(boolean done) {
-		this.done = done;
+	public void setStatus(TaskStatus status) {
+		this.status = status;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, text, done);
+		return Objects.hash(id, text, status);
 	}
 
 	@Override
@@ -49,11 +49,11 @@ public class Task {
 		Task other = (Task) obj;
 		return Objects.equals(id, other.id)
 				&& Objects.equals(text, other.text)
-				&& done == other.done;
+				&& status == other.status;
 	}
 
 	@Override
 	public String toString() {
-		return (done ? "[*]" : "[ ]") + text;
+		return "Task [id=" + id + ", text=" + text + ", status=" + status + "]";
 	}
 }
