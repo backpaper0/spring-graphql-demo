@@ -17,6 +17,7 @@ import graphql.relay.Edge;
 import graphql.relay.PageInfo;
 import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;
+import graphql.schema.GraphQLScalarType;
 import graphql.schema.idl.RuntimeWiring;
 
 @Component
@@ -36,6 +37,9 @@ public class TaskDataWiring implements RuntimeWiringBuilderCustomizer {
 		builder.type("Mutation",
 				typeRuntimeWiringBuilder -> typeRuntimeWiringBuilder.dataFetcher("newTask",
 						env -> taskRepository.newTask(env.getArgument("text"))));
+		builder.scalar(GraphQLScalarType.newScalar().name("TaskText")
+				.coercing(new TaskTextCoercing())
+				.build());
 	}
 
 	private class DataFetcherImpl implements DataFetcher<Connection<Task>> {

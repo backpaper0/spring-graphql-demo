@@ -25,7 +25,7 @@ public class TaskRepository {
 		return ts.limit(first).collect(Collectors.toList());
 	}
 
-	public Task newTask(String text) {
+	public Task newTask(TaskText text) {
 		Task task = new Task();
 		task.setId(UUID.randomUUID().toString());
 		task.setText(text);
@@ -34,13 +34,17 @@ public class TaskRepository {
 		return task;
 	}
 
+	private Task newTaskInternal(String text) {
+		return newTask(new TaskText(text));
+	}
+
 	@PostConstruct
 	public void init() {
 		// https://ja.wikipedia.org/wiki/メタ構文変数
-		newTask("foo");
-		newTask("bar");
-		newTask("baz");
-		newTask("qux");
-		newTask("quux");
+		newTaskInternal("foo");
+		newTaskInternal("bar");
+		newTaskInternal("baz");
+		newTaskInternal("qux");
+		newTaskInternal("quux");
 	}
 }

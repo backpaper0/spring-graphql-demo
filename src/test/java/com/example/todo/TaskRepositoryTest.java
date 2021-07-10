@@ -16,15 +16,15 @@ public class TaskRepositoryTest {
 	@BeforeEach
 	void init() {
 		// https://ja.wikipedia.org/wiki/メタ構文変数
-		tasks.add(sut.newTask("foo"));
-		tasks.add(sut.newTask("bar"));
-		tasks.add(sut.newTask("baz"));
-		tasks.add(sut.newTask("qux"));
-		tasks.add(sut.newTask("quux"));
-		tasks.add(sut.newTask("corge"));
-		tasks.add(sut.newTask("grault"));
-		tasks.add(sut.newTask("garply"));
-		tasks.add(sut.newTask("waldo"));
+		tasks.add(sut.newTask(new TaskText("foo")));
+		tasks.add(sut.newTask(new TaskText("bar")));
+		tasks.add(sut.newTask(new TaskText("baz")));
+		tasks.add(sut.newTask(new TaskText("qux")));
+		tasks.add(sut.newTask(new TaskText("quux")));
+		tasks.add(sut.newTask(new TaskText("corge")));
+		tasks.add(sut.newTask(new TaskText("grault")));
+		tasks.add(sut.newTask(new TaskText("garply")));
+		tasks.add(sut.newTask(new TaskText("waldo")));
 	}
 
 	@Test

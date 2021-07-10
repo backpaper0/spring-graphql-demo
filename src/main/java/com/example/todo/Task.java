@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Task {
 
 	private String id;
-	private String text;
+	private TaskText text;
 	private boolean done;
 
 	public String getId() {
@@ -16,11 +16,11 @@ public class Task {
 		this.id = id;
 	}
 
-	public String getText() {
+	public TaskText getText() {
 		return text;
 	}
 
-	public void setText(String text) {
+	public void setText(TaskText text) {
 		this.text = text;
 	}
 
@@ -56,5 +56,4 @@ public class Task {
 	public String toString() {
 		return (done ? "[*]" : "[ ]") + text;
 	}
-
 }
