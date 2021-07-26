@@ -25,6 +25,11 @@ public class TweetDataWiring implements RuntimeWiringBuilderCustomizer {
 				typeRuntimeWiringBuilder -> typeRuntimeWiringBuilder.dataFetcher("timeline",
 						env -> {
 							String id = env.getArgument("id");
+
+							if (logger.isDebugEnabled()) {
+								logger.debug("fetch Timeline: id = {}", id);
+							}
+
 							return tweetRepository.findTimelineById(id);
 						}));
 		builder.type("Tweet",
