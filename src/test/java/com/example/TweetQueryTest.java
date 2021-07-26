@@ -18,7 +18,7 @@ public class TweetQueryTest {
 	private GraphQlTester graphQlTester;
 
 	@Test
-	void book() {
+	void timeline() {
 		String query = "{" +
 				"  timeline(id: \"739d27f4-a946-4117-8efb-1156fdfcb994\") {" +
 				"    tweets {" +
