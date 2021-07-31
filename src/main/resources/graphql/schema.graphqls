@@ -3,6 +3,7 @@ type Query {
     book(isbn: ID!): Book
     timeline(id: ID!): Timeline
     tasks(first: Int, after: String): TaskConnection!
+    batchSizeExample: [BatchSizeExample!]!
 }
 
 
@@ -67,4 +68,9 @@ enum TaskStatus {
 	TODO
 	DOING
 	DONE
+}
+
+type BatchSizeExample {
+	id: ID!
+	value: String
 }

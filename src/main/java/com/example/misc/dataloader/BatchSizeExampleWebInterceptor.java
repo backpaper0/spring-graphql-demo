@@ -1,6 +1,7 @@
-package com.example.tweet;
+package com.example.misc.dataloader;
 
 import org.dataloader.DataLoader;
+import org.dataloader.DataLoaderOptions;
 import org.dataloader.DataLoaderRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,26 +14,27 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 @Component
-public class TweetWebInterceptor implements WebInterceptor {
+public class BatchSizeExampleWebInterceptor implements WebInterceptor {
 
 	private static final Logger logger = LoggerFactory
-			.getLogger(TweetWebInterceptor.class);
+			.getLogger(BatchSizeExampleWebInterceptor.class);
 
-	private final UserLoader loader;
+	private final BatchSizeExampleLoader loader;
 
-	public TweetWebInterceptor(UserLoader loader) {
+	public BatchSizeExampleWebInterceptor(BatchSizeExampleLoader loader) {
 		this.loader = loader;
 	}
 
 	@Override
 	public Mono<WebOutput> intercept(WebInput webInput, WebGraphQlHandler next) {
 		webInput.configureExecutionInput((input, builder) -> {
-			logger.debug("Register UserLoader");
+			logger.debug("Register BatchSizeExampleLoader");
 			DataLoaderRegistry registry = new DataLoaderRegistry();
 			if (input.getDataLoaderRegistry() != null) {
 				registry = registry.combine(input.getDataLoaderRegistry());
 			}
-			registry.register("tweet.user", DataLoader.newDataLoader(loader));
+			DataLoaderOptions options = DataLoaderOptions.newOptions().setMaxBatchSize(3);
+			registry.register("BatchSizeExample.value", DataLoader.newDataLoader(loader, options));
 			return builder.dataLoaderRegistry(registry).build();
 		});
 		return next.handle(webInput);
