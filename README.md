@@ -60,9 +60,9 @@ Web MVCで使う場合は`org.springframework.graphql.boot.GraphQlWebMvcAutoConf
 ちなみに`load`メソッドの戻り値は`java.util.concurrent.CompletableFuture`となっている。
 つまり`graphql.schema.DataFetcher`はシンプルな値の他に`java.util.Optional`や`java.util.concurrent.CompletableFuture`が返せるということになる。
 
-### ページネーション
+### ページング
 
-GraphQLの公式ページでページネーションの方式について触れつつ、オススメの方式としてRelayのCursor Connectionsの仕様を紹介している。
+GraphQLの公式ページでページングの方式について触れつつ、オススメの方式としてRelayのCursor Connectionsの仕様を紹介している。
 
 - https://graphql.org/learn/pagination/
 - https://relay.dev/graphql/connections.htm
@@ -70,6 +70,19 @@ GraphQLの公式ページでページネーションの方式について触れ�
 RelayというのはFacebookが提供しているGraphQLクライアントライブラリ。
 
 実装例は`com.example.todo.TaskDataWiring`を参考にすること。
+
+### DataFetcher.getで返せる型
+
+- `Optional`
+    - `DefaultValueUnboxer`で`unwrap`
+- `Stream`、`Iterator`、配列
+    - `FpKit`で`Iterable`へ変換
+- `Mono`、`Flux`
+    - `ContextDataFetcherDecorator`で`unwrap`
+- `DataFetcherResult`
+    - `ExecutionStrategy.unboxPossibleDataFetcherResult`で`unwrap`される
+- `CompletionStage`
+    - `Async.toCompletableFuture`で`CompletableFuture`へ変換される
 
 ## 参考リソース
 
